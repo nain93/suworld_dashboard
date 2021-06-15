@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import DonutChart from "./ChartFolder/DonutChart";
+import Radar from "./ChartFolder/Radar";
 
 const Container = styled.div`
   padding: 20px;
@@ -10,8 +11,7 @@ const Container = styled.div`
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(3, 1fr);
   color: white;
-  > div {
-  }
+  grid-gap: 15px;
   > div:nth-child(5) {
     grid-row: 1/3;
     grid-column: 2/4;
@@ -29,7 +29,9 @@ function GridBox() {
         <DonutChart />
       </div>
       <div>2</div>
-      <div>3</div>
+      <div>
+        <Radar />
+      </div>
       <div>4</div>
       <div>5</div>
       <div>6</div>
