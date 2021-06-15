@@ -7,3 +7,6 @@ react-live-clock
 
 차트
 --save react-apexcharts apexcharts
+react-highcharts
+highcharts-react-official
+highcharts-more

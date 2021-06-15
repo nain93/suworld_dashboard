@@ -5,8 +5,8 @@ import styled from "styled-components";
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  display: flex;
   color: black;
+  display: flex;
   > div {
     display: flex;
     justify-content: center;
@@ -23,14 +23,17 @@ function Radar() {
     series: [
       {
         name: "Series 1",
-        data: [52, 85, 50],
+        data: [22, 35, 50],
       },
     ],
+
     options: {
       chart: {
-        height: 350,
+        height: "100%",
         type: "radar",
+        offsetY: 25,
       },
+
       dataLabels: {
         enabled: false,
       },
@@ -39,6 +42,7 @@ function Radar() {
           size: 100,
           polygons: {
             strokeColors: "rgba(0, 81, 127, 0.5)",
+            connectorColors: "rgba(0, 81, 127, 0.5)",
             fill: {
               colors: ["#00111B", "#00111B"],
             },
@@ -46,7 +50,10 @@ function Radar() {
         },
       },
       title: {
-        // text: "Radar with Polygon Fill",
+        text: "Radar with Polygon Fill",
+        align: "center",
+        offsetY: -25,
+        // margin: 20,
       },
       colors: ["#4274ff"],
       markers: {
@@ -63,7 +70,12 @@ function Radar() {
         },
       },
       xaxis: {
-        categories: ["Sunday", "Monday", "Tuesday"],
+        categories: ["Monday", "Sunday", "Tuesday"],
+        labels: {
+          style: {
+            colors: ["#5785f2", "#5785f2", "#5785f2"],
+          },
+        },
       },
     },
   });
