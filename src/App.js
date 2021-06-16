@@ -3,6 +3,7 @@ import { GlobalContainer } from "./GolbalStyles";
 import Nav from "./Nav";
 import GridBox from "./GridBox";
 import styled from "styled-components";
+import Header from "./Header";
 
 const Container = styled.div`
   height: 100vh;
@@ -16,6 +17,7 @@ function App() {
       <GlobalContainer />
       <Container>
         <Nav />
+        <Header />
         <GridBox />
       </Container>
     </>

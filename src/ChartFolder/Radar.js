@@ -6,16 +6,22 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   color: black;
-  display: flex;
   > div {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
+    height: 100%;
   }
   /* background-color: rgba(10, 19, 45, 0.5); */
   box-shadow: inset 0px -10px 30px -10px #00517f;
   border: 1px solid rgba(0, 81, 127, 0.5);
+  > span {
+    color: white;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+  }
 `;
 
 function Radar() {
@@ -23,15 +29,15 @@ function Radar() {
     series: [
       {
         name: "Series 1",
-        data: [22, 35, 50],
+        data: [22, 35, 90],
       },
     ],
-
     options: {
       chart: {
         height: "100%",
         type: "radar",
         offsetY: 25,
+        foreColor: "white",
       },
 
       dataLabels: {
@@ -50,10 +56,11 @@ function Radar() {
         },
       },
       title: {
-        text: "Radar with Polygon Fill",
-        align: "center",
-        offsetY: -25,
-        // margin: 20,
+        text: "0",
+        align: "left",
+        style: {
+          color: "inherit",
+        },
       },
       colors: ["#4274ff"],
       markers: {
@@ -71,22 +78,19 @@ function Radar() {
       },
       xaxis: {
         categories: ["Monday", "Sunday", "Tuesday"],
-        labels: {
-          style: {
-            colors: ["#5785f2", "#5785f2", "#5785f2"],
-          },
-        },
       },
     },
   });
 
   return (
     <Container>
+      <span>풀이름, 참여량, 비율</span>
       <Chart
         options={chartStyle.options}
         series={chartStyle.series}
         type="radar"
         height="220"
+        width="550"
       />
     </Container>
   );

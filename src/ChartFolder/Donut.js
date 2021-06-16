@@ -15,6 +15,11 @@ const Container = styled.div`
   /* background-color: rgba(10, 19, 45, 0.5); */
   box-shadow: inset 0px -10px 30px -10px #00517f;
   border: 1px solid rgba(0, 81, 127, 0.5);
+  > span {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+  }
 `;
 
 function DonutChart() {
@@ -35,6 +40,7 @@ function DonutChart() {
             endAngle: 135,
             opacity: 0.5,
           },
+
           dataLabels: {
             name: {
               show: true,
@@ -173,6 +179,7 @@ function DonutChart() {
 
   return (
     <Container>
+      <span>MP, P, G 비율</span>
       <Chart
         options={chartStyle1.optionsRadial}
         series={chartStyle1.seriesRadial}

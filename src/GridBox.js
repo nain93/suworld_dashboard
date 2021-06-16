@@ -1,14 +1,20 @@
 import React from "react";
 import styled from "styled-components";
-import DonutChart from "./ChartFolder/DonutChart";
+import Donut from "./ChartFolder/Donut";
+import Donut2 from "./ChartFolder/Donut2";
+import Donut3 from "./ChartFolder/Donut3";
 import Radar from "./ChartFolder/Radar";
-import Polar from "./ChartFolder/Polar";
+import Bar from "./ChartFolder/Bar";
+import Bar2 from "./ChartFolder/Bar2";
+import Spline from "./ChartFolder/Spline";
+import CoinTable from "./CoinTable";
+import Map from "./ChartFolder/Map";
 
 const Container = styled.div`
-  padding: 20px;
+  padding: 0 20px;
   display: grid;
   width: 100%;
-  height: 90%;
+  height: 80%;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(3, 1fr);
   color: white;
@@ -27,18 +33,29 @@ function GridBox() {
   return (
     <Container>
       <div>
-        <DonutChart />
+        <Donut />
       </div>
-      <div>2</div>
+      <div style={{ position: "relative" }}>
+        <Donut3 />
+      </div>
       <div>
-        {/* <Radar /> */}
         <Radar />
       </div>
-      <div>4</div>
-      <div>5</div>
-      <div>6</div>
-      <div>7</div>
-      <div>8</div>
+      <div>
+        <Spline />
+      </div>
+      <div>
+        <Map />
+      </div>
+      <div>
+        <Bar />
+      </div>
+      <div>
+        <CoinTable />
+      </div>
+      <div>
+        <Bar2 />
+      </div>
     </Container>
   );
 }

@@ -5,8 +5,8 @@ import "moment-timezone";
 
 const Container = styled.div`
   width: 100%;
-  height: 10%;
-  /* box-shadow: 0px 1px 5px 2px rgba(0, 30, 140, 0.4); */
+  height: 9%;
+  padding: 0 20px;
 `;
 
 const TitleBox = styled.div`

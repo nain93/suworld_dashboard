@@ -10,3 +10,5 @@ react-live-clock
 react-highcharts
 highcharts-react-official
 highcharts-more
+@nivo/core @nivo/geo
+@nivo/pie
