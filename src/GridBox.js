@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import DonutChart from "./ChartFolder/DonutChart";
 import Radar from "./ChartFolder/Radar";
+import Polar from "./ChartFolder/Polar";
 
 const Container = styled.div`
   padding: 20px;
@@ -30,6 +31,7 @@ function GridBox() {
       </div>
       <div>2</div>
       <div>
+        {/* <Radar /> */}
         <Radar />
       </div>
       <div>4</div>
