@@ -36,7 +36,7 @@ function Bar() {
       },
       colors: ["#5785f2", "#0098bf", "#143fe8"],
       xaxis: {
-        categories: [],
+        categories: "",
         labels: {
           style: {
             colors: [
@@ -88,27 +88,24 @@ function Bar() {
     // total_trx
     // timestamp
 
-    const calday = async () => {
-      let today = new Date();
-      let initDay = new Date(today.setDate(today.getDate() - 14));
-      let initMonth = initDay.getMonth() + 1;
-      let initDayDate = initDay.getDate();
-      let newDay = [`${initMonth}.${initDayDate}`];
+    let today = new Date();
+    let initDay = new Date(today.setDate(today.getDate() - 14));
+    let initMonth = initDay.getMonth() + 1;
+    let initDayDate = initDay.getDate();
+    let newDay = [`${initMonth}.${initDayDate}`];
 
-      for (let i = 0; i < 14; i++) {
-        let afterDay = new Date(today.setDate(today.getDate() + 1));
-        let afterDayMonth = afterDay.getMonth() + 1;
-        let afterDayDate = afterDay.getDate();
-        newDay.push(`${afterDayMonth}.${afterDayDate}`);
-      }
-      setBarOptions((options) => ({
-        ...options,
-        options: {
-          xaxis: { categories: newDay },
-        },
-      }));
-    };
-    calday();
+    for (let i = 0; i < 14; i++) {
+      let afterDay = new Date(today.setDate(today.getDate() + 1));
+      let afterDayMonth = afterDay.getMonth() + 1;
+      let afterDayDate = afterDay.getDate();
+      newDay.push(`${afterDayMonth}.${afterDayDate}`);
+    }
+    setBarOptions((options) => ({
+      ...options,
+      options: {
+        xaxis: { categories: newDay },
+      },
+    }));
   }, []);
 
   useEffect(() => {
