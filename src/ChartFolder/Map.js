@@ -44,7 +44,7 @@ function Map() {
         projectionTranslation={[0.5, 0.5]}
         projectionRotation={[0, 0, 0]}
         enableGraticule={true}
-        graticuleLineColor="#4274ff"
+        graticuleLineColor="inherit"
         borderWidth={0.5}
         borderColor="#4274ff"
         legends={[
