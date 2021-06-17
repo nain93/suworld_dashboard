@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { socket } from "./App";
 
 const Container = styled.div`
   width: 100%;
@@ -12,7 +13,7 @@ const Container = styled.div`
     width: 100%;
     text-align: center;
     table-layout: fixed;
-    > tr {
+    > tbody {
       td {
       }
       td:nth-child(2) {
@@ -28,56 +29,57 @@ const Container = styled.div`
 `;
 
 function CoinTable() {
+  const [block, setBlock] = useState([]);
+
+  useEffect(() => {
+    if (block.length > 4) {
+      return;
+    }
+    socket.on("block", (data) => {
+      const json = JSON.parse(data);
+      // setBlock((curData) => [json, ...curData]);
+    });
+    socket.on("disconnect", (reason) => {
+      console.log(reason);
+    });
+  }, []);
+
   return (
     <Container>
       <table>
-        <tr>
-          <th></th>
-          <th></th>
-          <th>블록정보</th>
-        </tr>
-        <tr>
-          <th>name</th>
-          <th>token</th>
-          <th>apply</th>
-          <th>time</th>
-          <th>result</th>
-        </tr>
-        <tr>
-          <td>asd</td>
-          <td>SW5q12x363sa6c0asd</td>
-          <td>asd</td>
-          <td>asd</td>
-          <td>asd</td>
-        </tr>
-        <tr>
-          <td>asd</td>
-          <td>GE2qa12x54dasa6c0asd</td>
-          <td>asd</td>
-          <td>asd</td>
-          <td>asd</td>
-        </tr>
-        <tr>
-          <td>asd</td>
-          <td>CQu8qqa12asdg4dasa</td>
-          <td>asd</td>
-          <td>asd</td>
-          <td>asd</td>
-        </tr>
-        <tr>
-          <td>asd</td>
-          <td>TD12aacvv1dfavvasfzxc</td>
-          <td>asd</td>
-          <td>asd</td>
-          <td>asd</td>
-        </tr>
-        <tr>
-          <td>asd</td>
-          <td>GV12asfacaasdfadfda</td>
-          <td>asd</td>
-          <td>asd</td>
-          <td>asd</td>
-        </tr>
+        <thead>
+          <tr>
+            <th></th>
+            <th></th>
+            <th>블록정보</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>block</th>
+            <th>trx_count</th>
+            <th>timestamp</th>
+            <th>reward</th>
+            <th>passtime</th>
+          </tr>
+        </tbody>
+        {!block ? (
+          <div>...loading</div>
+        ) : (
+          <>
+            {block.map((item, idx) => (
+              <tbody key={idx}>
+                <tr>
+                  <td>{item.block}</td>
+                  <td>{item.timestamp}</td>
+                  <td>{item.trx_count}</td>
+                  <td>{item.reward}</td>
+                  <td>{item.passtime}</td>
+                </tr>
+              </tbody>
+            ))}
+          </>
+        )}
       </table>
     </Container>
   );

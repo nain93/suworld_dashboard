@@ -1,6 +1,6 @@
 import styled, { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
-import backImg from "./img/back_img.jpg";
+import backImg from "./img/back_img.png";
 
 const GlobalStyles = createGlobalStyle`
     ${reset}
@@ -29,6 +29,7 @@ const GlobalStyles = createGlobalStyle`
 export const GlobalContainer = styled.div`
   background-image: url(${backImg});
   background-size: cover;
+  background-position: center center;
   height: 100vh;
   width: 100%;
   position: absolute;

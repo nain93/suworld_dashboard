@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Clock from "react-live-clock";
 import "moment-timezone";
+import { socket } from "./App";
 
 const Container = styled.div`
   width: 100%;
@@ -29,6 +30,17 @@ const TitleBox = styled.div`
 `;
 
 function Nav() {
+  const [nodeCount, setNodeCount] = useState("");
+
+  useEffect(() => {
+    socket.on("node", (data) => {
+      const json = JSON.parse(data);
+      setNodeCount(json);
+    });
+
+    return () => socket.on("disconnect", function (reason) {});
+  }, []);
+
   return (
     <Container>
       <TitleBox>

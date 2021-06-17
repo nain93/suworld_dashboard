@@ -4,6 +4,8 @@
 styled-reset
 react-router-dom
 react-live-clock
+socket.io
+socket.io-client
 
 차트
 --save react-apexcharts apexcharts

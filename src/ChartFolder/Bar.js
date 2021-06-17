@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Chart from "react-apexcharts";
+import { socket } from "../App";
 
 const Container = styled.div`
   width: 100%;
@@ -33,7 +34,7 @@ function Bar() {
         id: "basic-bar",
         foreColor: "white",
       },
-      colors: ["#0098bf", "#5785f2", "#143fe8"],
+      colors: ["#5785f2", "#0098bf", "#143fe8"],
       xaxis: {
         categories: ["0"],
         labels: {
@@ -68,25 +69,25 @@ function Bar() {
       },
     },
     series: [
-      {
-        name: "지갑 생성",
-        data: [44, 55, 57, 56, 61, 58, 63, 60, 66],
-        style: {
-          colors: ["#5785f2"],
-        },
-      },
+      // {
+      //   name: "지갑 생성",
+      //   data: [44, 55, 57, 56, 61, 58, 63, 60, 66],
+      // },
+      // {
+      //   name: "FUN 생성",
+      //   data: [35, 41, 36, 26, 45, 48, 52, 53, 41],
+      // },
       {
         name: "픽 생성",
-        data: [76, 85, 101, 98, 87, 105, 91, 114, 94],
-      },
-      {
-        name: "FUN 생성",
-        data: [35, 41, 36, 26, 45, 48, 52, 53, 41],
+        data: [111, 85, 101, 98, 87, 105, 91, 114, 94],
       },
     ],
   });
 
   useEffect(() => {
+    // total_trx
+    // timestamp
+
     const calday = async () => {
       let today = new Date();
       let initDay = new Date(today.setDate(today.getDate() - 14));
@@ -110,8 +111,21 @@ function Bar() {
     calday();
   }, []);
 
+  const [jsonData, setJsonData] = useState();
+
+  useEffect(() => {
+    socket.on("trx", (data) => {
+      const json = JSON.parse(data);
+      setJsonData(json);
+      setBarOptions({
+        series: [...barOptions.series, { name: "d", data: [json.total_trx] }],
+      });
+    });
+  }, []);
+
   return (
     <Container>
+      {/* {console.log(jsonData)} */}
       <span>15일간 데이터</span>
       <Chart
         options={barOptions.options}
