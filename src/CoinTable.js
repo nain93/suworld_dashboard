@@ -37,7 +37,7 @@ function CoinTable() {
     }
     socket.on("block", (data) => {
       const json = JSON.parse(data);
-      // setBlock((curData) => [json, ...curData]);
+      setBlock((curData) => [json, ...curData]);
     });
     socket.on("disconnect", (reason) => {
       console.log(reason);
@@ -57,8 +57,8 @@ function CoinTable() {
         <tbody>
           <tr>
             <th>block</th>
-            <th>trx_count</th>
             <th>timestamp</th>
+            <th>trx_count</th>
             <th>reward</th>
             <th>passtime</th>
           </tr>
@@ -67,7 +67,7 @@ function CoinTable() {
           <div>...loading</div>
         ) : (
           <>
-            {block.map((item, idx) => (
+            {/* {block.map((item, idx) => (
               <tbody key={idx}>
                 <tr>
                   <td>{item.block}</td>
@@ -77,7 +77,7 @@ function CoinTable() {
                   <td>{item.passtime}</td>
                 </tr>
               </tbody>
-            ))}
+            ))} */}
           </>
         )}
       </table>
