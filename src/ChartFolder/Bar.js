@@ -36,7 +36,7 @@ function Bar() {
       },
       colors: ["#5785f2", "#0098bf", "#143fe8"],
       xaxis: {
-        categories: ["0"],
+        categories: "",
         labels: {
           style: {
             colors: [
@@ -78,8 +78,8 @@ function Bar() {
       //   data: [35, 41, 36, 26, 45, 48, 52, 53, 41],
       // },
       {
-        name: "픽 생성",
-        data: [111, 85, 101, 98, 87, 105, 91, 114, 94],
+        name: "컨트랙션",
+        data: [2200200],
       },
     ],
   });
@@ -88,38 +88,36 @@ function Bar() {
     // total_trx
     // timestamp
 
-    const calday = async () => {
-      let today = new Date();
-      let initDay = new Date(today.setDate(today.getDate() - 14));
-      let initMonth = initDay.getMonth() + 1;
-      let initDayDate = initDay.getDate();
-      let newDay = [`${initMonth}.${initDayDate}`];
+    let today = new Date();
+    let initDay = new Date(today.setDate(today.getDate() - 14));
+    let initMonth = initDay.getMonth() + 1;
+    let initDayDate = initDay.getDate();
+    let newDay = [`${initMonth}.${initDayDate}`];
 
-      for (let i = 0; i < 14; i++) {
-        let afterDay = new Date(today.setDate(today.getDate() + 1));
-        let afterDayMonth = afterDay.getMonth() + 1;
-        let afterDayDate = afterDay.getDate();
-        newDay.push(`${afterDayMonth}.${afterDayDate}`);
-      }
-      setBarOptions((options) => ({
-        ...options,
-        options: {
-          xaxis: { categories: newDay },
-        },
-      }));
-    };
-    calday();
+    for (let i = 0; i < 14; i++) {
+      let afterDay = new Date(today.setDate(today.getDate() + 1));
+      let afterDayMonth = afterDay.getMonth() + 1;
+      let afterDayDate = afterDay.getDate();
+      newDay.push(`${afterDayMonth}.${afterDayDate}`);
+    }
+    setBarOptions((options) => ({
+      ...options,
+      options: {
+        xaxis: { categories: newDay },
+      },
+    }));
   }, []);
-
-  const [jsonData, setJsonData] = useState();
 
   useEffect(() => {
     socket.on("trx", (data) => {
       const json = JSON.parse(data);
-      setJsonData(json);
-      setBarOptions({
-        series: [...barOptions.series, { name: "d", data: [json.total_trx] }],
-      });
+      setBarOptions((options) => ({
+        ...options,
+        series: [{ data: [json.total_trx] }],
+      }));
+      // setBarOptions({
+      //   series: [{ data: [json.total_trx] }],
+      // });
     });
   }, []);
 
