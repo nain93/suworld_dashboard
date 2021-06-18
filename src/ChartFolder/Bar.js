@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Chart from "react-apexcharts";
-import { socket } from "../App";
+import { socket, socket2 } from "../App";
 
 const Container = styled.div`
   width: 100%;
@@ -59,35 +59,25 @@ function Bar() {
           },
         },
       },
+
       dataLabels: {
         enabled: false,
       },
       plotOptions: {
-        // bar: {
-        //   borderRadius: 4,
-        // },
+        bar: {
+          borderRadius: 0,
+        },
       },
     },
     series: [
-      // {
-      //   name: "지갑 생성",
-      //   data: [44, 55, 57, 56, 61, 58, 63, 60, 66],
-      // },
-      // {
-      //   name: "FUN 생성",
-      //   data: [35, 41, 36, 26, 45, 48, 52, 53, 41],
-      // },
       {
         name: "컨트랙션",
-        data: [2200200],
+        data: [],
       },
     ],
   });
 
   useEffect(() => {
-    // total_trx
-    // timestamp
-
     let today = new Date();
     let initDay = new Date(today.setDate(today.getDate() - 14));
     let initMonth = initDay.getMonth() + 1;
@@ -100,30 +90,50 @@ function Bar() {
       let afterDayDate = afterDay.getDate();
       newDay.push(`${afterDayMonth}.${afterDayDate}`);
     }
-    setBarOptions((options) => ({
-      ...options,
-      options: {
-        xaxis: { categories: newDay },
-      },
-    }));
-  }, []);
-
-  useEffect(() => {
-    socket.on("trx", (data) => {
+    socket2.on("trx30", (data) => {
       const json = JSON.parse(data);
       setBarOptions((options) => ({
         ...options,
-        series: [{ data: [json.total_trx] }],
+        options: {
+          xaxis: { categories: newDay },
+        },
+        series: [
+          {
+            data: json.summary
+              .map((item) => Number(item.gen_block))
+              .slice(0, 15),
+          },
+        ],
       }));
-      // setBarOptions({
-      //   series: [{ data: [json.total_trx] }],
-      // });
     });
+    // setBarOptions((options) => ({
+    //   ...options,
+    //   options: {
+    //     xaxis: { categories: newDay },
+    //   },
+    // }));
+    return () => socket.on("disconnect", function (reason) {});
   }, []);
+
+  // useEffect(() => {
+  //   socket2.on("trx30", (data) => {
+  //     const json = JSON.parse(data);
+  //     setBarOptions((options) => ({
+  //       ...options,
+  //       series: [
+  //         {
+  //           data: json.summary
+  //             .map((item) => Number(item.gen_block))
+  //             .slice(0, 15),
+  //         },
+  //       ],
+  //     }));
+  //   });
+  //   return () => socket.on("disconnect", function (reason) {});
+  // }, []);
 
   return (
     <Container>
-      {/* {console.log(jsonData)} */}
       <span>15일간 데이터</span>
       <Chart
         options={barOptions.options}

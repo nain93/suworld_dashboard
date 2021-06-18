@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
 import styled from "styled-components";
+import { socket, socket2 } from "../App";
 
 const Container = styled.div`
   width: 100%;
@@ -157,24 +158,35 @@ function DonutChart() {
       stroke: {
         lineCap: "butt",
       },
-      labels: ["P"],
+      labels: ["G"],
     },
     seriesRadial: [0],
   });
 
   useEffect(() => {
-    setChartStyle1((chartStyle1) => ({
-      ...chartStyle1,
-      seriesRadial: [56],
-    }));
-    setChartStyle2((chartStyle2) => ({
-      ...chartStyle2,
-      seriesRadial: [84],
-    }));
-    setChartStyle3((chartStyle3) => ({
-      ...chartStyle3,
-      seriesRadial: [60],
-    }));
+    socket2.on("PoolTRatio", (data) => {
+      const json = JSON.parse(data);
+      setChartStyle1((chartStyle1) => ({
+        ...chartStyle1,
+        seriesRadial: [
+          Math.round((json.mp / (json.mp + json.p + json.g)) * 100),
+        ],
+      }));
+      setChartStyle2((chartStyle2) => ({
+        ...chartStyle2,
+        seriesRadial: [
+          Math.round((json.p / (json.mp + json.p + json.g)) * 100),
+        ],
+      }));
+      setChartStyle3((chartStyle3) => ({
+        ...chartStyle3,
+        seriesRadial: [
+          Math.round((json.g / (json.mp + json.p + json.g)) * 100),
+        ],
+      }));
+    });
+
+    // return () => socket.on("disconnect", function (reason) {});
   }, []);
 
   return (

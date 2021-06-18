@@ -18,6 +18,12 @@ export const socket = io("https://sws.suworld.net", {
   reconnectionAttempts: 1000,
 });
 
+export const socket2 = io("https://sdash.suworld.net", {
+  transports: ["websocket"],
+  forceNew: true,
+  reconnectionAttempts: 1000,
+});
+
 function App() {
   useEffect(() => {
     socket.on("connect", (data) => {
@@ -26,6 +32,16 @@ function App() {
 
     socket.on("reconnect", (data) => {
       socket.emit("main-init", {});
+    });
+  }, []);
+
+  useEffect(() => {
+    socket2.on("connect", function (data) {
+      socket2.emit("dash-init", {});
+    });
+
+    socket2.on("reconnect", function (data) {
+      socket2.emit("dash-init", {});
     });
   }, []);
   return (

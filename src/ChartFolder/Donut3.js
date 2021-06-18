@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { ResponsivePie } from "@nivo/pie";
 import { data } from "../data2";
+import { socket2 } from "../App";
 
 const Container = styled.div`
   color: black;
@@ -26,6 +27,31 @@ const Container = styled.div`
 `;
 
 function Donut3() {
+  const [chartStyle, setChartStyle] = useState([]);
+
+  // json.att.map((item) => ({
+  //   id: item.name,
+  //   label: item.name,
+  //   value: item.att,
+  // }))
+
+  // useEffect(() => {
+  //   socket2.on(
+  //     "PoolAtt",
+  //     (data) => {
+  //       const json = JSON.parse(data);
+  //       setChartStyle(
+  //         json.att.map((item) => ({
+  //           id: item.name,
+  //           label: item.name,
+  //           value: item.att,
+  //         }))
+  //       );
+  //     },
+  //     []
+  //   );
+  // });
+
   return (
     <Container>
       <span>매니저풀 이름과 관심도</span>
@@ -40,7 +66,7 @@ function Donut3() {
         borderWidth={1}
         borderColor={{ from: "color", modifiers: [["darker", 0.2]] }}
         arcLinkLabelsSkipAngle={10}
-        arcLinkLabelsTextColor="#4274ff"
+        arcLinkLabelsTextColor="#a0a0a0"
         arcLinkLabelsColor={{ from: "color" }}
         arcLabelsSkipAngle={10}
         arcLabelsTextColor={{ from: "color", modifiers: [["darker", "2.2"]] }}

@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import Donut from "./ChartFolder/Donut";
-import Donut2 from "./ChartFolder/Donut2";
 import Donut3 from "./ChartFolder/Donut3";
 import Radar from "./ChartFolder/Radar";
 import Bar from "./ChartFolder/Bar";

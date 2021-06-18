@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
 import styled from "styled-components";
+import { socket2 } from "../App";
 
 const Container = styled.div`
   width: 100%;
@@ -34,9 +35,8 @@ function Radar() {
     ],
     options: {
       chart: {
-        height: "100%",
         type: "radar",
-        offsetY: 25,
+        offsetY: 10,
         foreColor: "white",
       },
 
@@ -45,7 +45,7 @@ function Radar() {
       },
       plotOptions: {
         radar: {
-          size: 100,
+          size: 85,
           polygons: {
             strokeColors: "rgba(0, 81, 127, 0.5)",
             connectorColors: "rgba(0, 81, 127, 0.5)",
@@ -69,6 +69,7 @@ function Radar() {
         strokeColor: "#4274ff",
         strokeWidth: 2,
       },
+
       tooltip: {
         y: {
           formatter: function (val) {
@@ -78,8 +79,31 @@ function Radar() {
       },
       xaxis: {
         categories: ["Monday", "Sunday", "Tuesday"],
+        position: "bottom",
+      },
+      yaxis: {
+        show: false,
       },
     },
+  });
+
+  useEffect(() => {
+    socket2.on(
+      "PoolNQRatio",
+      (data) => {
+        const json = JSON.parse(data);
+        setChartStyle((options) => ({
+          options: {
+            xaxis: {
+              categories: json.pData.map((item) => item.name),
+            },
+          },
+          series: [{ data: json.pData.map((item) => item.qty) }],
+        }));
+        return () => socket2.on("disconnect", function (reason) {});
+      },
+      []
+    );
   });
 
   return (
