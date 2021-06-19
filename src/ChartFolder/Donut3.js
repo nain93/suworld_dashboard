@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { ResponsivePie } from "@nivo/pie";
 import { socket2 } from "../App";
+import { data } from "../data2";
 
 const Container = styled.div`
   color: black;
@@ -63,15 +64,17 @@ function Donut3() {
           value: json.qty[i],
         });
       }
-      setChartStyle(newArr.slice(0, 5));
+      // newArr = newArr.slice(0, 5);
+      setChartStyle(newArr);
     });
   }, []);
 
   return (
     <Container>
       <span>매니저풀 이름과 관심도</span>
+      {console.log(chartStyle)}
       <ResponsivePie
-        data={chartStyle}
+        data={chartStyle === [] ? data : chartStyle}
         height={200}
         margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
         innerRadius={0.5}
