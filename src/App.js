@@ -1,5 +1,4 @@
 import GlobalStyles from "./GolbalStyles";
-import { GlobalContainer } from "./GolbalStyles";
 import Nav from "./Nav";
 import GridBox from "./GridBox";
 import styled from "styled-components";
@@ -19,7 +18,6 @@ const Container = styled.div`
     height: 100%;
   }
 `;
-const Part = styled(Particles)``;
 
 export const socket = io("https://sws.suworld.net", {
   transports: ["websocket"],
