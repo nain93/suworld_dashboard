@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
 import styled from "styled-components";
-import { socket, socket2 } from "../App";
+import { socket2 } from "../App";
 
 const Container = styled.div`
   width: 100%;
@@ -185,8 +185,6 @@ function DonutChart() {
         ],
       }));
     });
-
-    // return () => socket.on("disconnect", function (reason) {});
   }, []);
 
   return (

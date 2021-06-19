@@ -23,17 +23,18 @@ const GlobalStyles = createGlobalStyle`
         cursor:pointer;
         background-color: inherit;
     }
+ 
    
 `;
 
 export const GlobalContainer = styled.div`
-  background-image: url(${backImg});
+  /* background-image: url(${backImg});
+  z-index: -999; */
   background-size: cover;
   background-position: center center;
   height: 100vh;
   width: 100%;
   position: absolute;
-  z-index: -999;
   opacity: 0.5;
 `;
 

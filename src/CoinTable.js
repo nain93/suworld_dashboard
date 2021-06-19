@@ -28,16 +28,31 @@ const Container = styled.div`
 `;
 
 const tableFade = keyframes`
-  0% {
+  from {
+    color:red;
+    opacity: 0;
+  }
+  to {
+    color:white;
+    opacity: 1;
+    transform: none;
+  }
+  /* 0% {
+    color:red;
     opacity: 0;
   }
   100% {
+    color:white;
     opacity: 1;
-  }
+  } */
 `;
 
 const TableStyle = styled.tbody`
-  animation: ${tableFade} 1s linear;
+  transform: translateY(-50px);
+  opacity: 0;
+  animation: ${tableFade} 0.2s ease-in-out forwards;
+  /* animation: ${tableFade} 1s linear;
+  transition: ; */
 `;
 
 function CoinTable() {
@@ -63,11 +78,7 @@ function CoinTable() {
       ]);
     });
     setFadeOn(true);
-    return () => {
-      socket.on("disconnect", (reason) => {
-        console.log(reason);
-      });
-    };
+    return () => socket.close();
   }, []);
 
   useEffect(() => {

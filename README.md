@@ -6,6 +6,7 @@ react-router-dom
 react-live-clock
 socket.io
 socket.io-client
+react-particles-js
 
 차트
 --save react-apexcharts apexcharts

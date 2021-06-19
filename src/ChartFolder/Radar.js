@@ -29,8 +29,8 @@ function Radar() {
   const [chartStyle, setChartStyle] = useState({
     series: [
       {
-        name: "Series 1",
-        data: [22, 35, 90],
+        name: "Ratio",
+        data: [281319148, 211112148, 251219148, 281319248, 261319148],
       },
     ],
     options: {
@@ -38,6 +38,9 @@ function Radar() {
         type: "radar",
         offsetY: 10,
         foreColor: "white",
+        toolbar: {
+          show: false,
+        },
       },
 
       dataLabels: {
@@ -78,7 +81,7 @@ function Radar() {
         },
       },
       xaxis: {
-        categories: ["Monday", "Sunday", "Tuesday"],
+        categories: ["Tared", "Pio", "Erebos", "Neo", "TFIN"],
         position: "bottom",
       },
       yaxis: {
@@ -87,24 +90,27 @@ function Radar() {
     },
   });
 
+  const [test, setTest] = useState("");
+
   useEffect(() => {
-    socket2.on(
-      "PoolNQRatio",
-      (data) => {
-        const json = JSON.parse(data);
-        setChartStyle((options) => ({
-          options: {
-            xaxis: {
-              categories: json.pData.map((item) => item.name),
-            },
+    socket2.on("PoolNQRatio", (data) => {
+      const json = JSON.parse(data);
+      setTest(json);
+      setChartStyle((options) => ({
+        ...options,
+        options: {
+          xaxis: {
+            categories: json.name,
           },
-          series: [{ data: json.pData.map((item) => item.qty) }],
-        }));
-        return () => socket2.on("disconnect", function (reason) {});
-      },
-      []
-    );
-  });
+        },
+        series: [
+          {
+            data: json.qty,
+          },
+        ],
+      }));
+    });
+  }, []);
 
   return (
     <Container>

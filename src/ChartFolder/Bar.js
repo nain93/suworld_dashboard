@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Chart from "react-apexcharts";
-import { socket, socket2 } from "../App";
+import io from "socket.io-client";
+import { socket2 } from "../App";
 
 const Container = styled.div`
   width: 100%;
@@ -33,8 +34,15 @@ function Bar() {
       chart: {
         id: "basic-bar",
         foreColor: "white",
+        toolbar: {
+          show: false,
+        },
       },
       colors: ["#5785f2", "#0098bf", "#143fe8"],
+      yaxis: {
+        // min: 0,
+        // max: 90000,
+      },
       xaxis: {
         categories: "",
         labels: {
@@ -101,36 +109,14 @@ function Bar() {
           {
             data: json.summary
               .map((item) => Number(item.gen_block))
-              .slice(0, 15),
+              .slice(0, 15)
+              .reverse(),
           },
         ],
       }));
     });
-    // setBarOptions((options) => ({
-    //   ...options,
-    //   options: {
-    //     xaxis: { categories: newDay },
-    //   },
-    // }));
-    return () => socket.on("disconnect", function (reason) {});
+    // return () => socket.close();
   }, []);
-
-  // useEffect(() => {
-  //   socket2.on("trx30", (data) => {
-  //     const json = JSON.parse(data);
-  //     setBarOptions((options) => ({
-  //       ...options,
-  //       series: [
-  //         {
-  //           data: json.summary
-  //             .map((item) => Number(item.gen_block))
-  //             .slice(0, 15),
-  //         },
-  //       ],
-  //     }));
-  //   });
-  //   return () => socket.on("disconnect", function (reason) {});
-  // }, []);
 
   return (
     <Container>
