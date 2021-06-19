@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Chart from "react-apexcharts";
-import io from "socket.io-client";
 import { socket2 } from "../App";
 
 const Container = styled.div`

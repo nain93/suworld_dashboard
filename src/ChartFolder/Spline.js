@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Chart from "react-apexcharts";
-import { socket2 } from "../App";
+// import { socket2 } from "../App";
 
 const Container = styled.div`
   width: 100%;
@@ -77,6 +77,7 @@ function Spline() {
   });
 
   let time = 600;
+  // eslint-disable-next-line no-unused-vars
   let hours = "";
 
   let x = setInterval(() => {
@@ -96,36 +97,36 @@ function Spline() {
     }
     newDay.reverse();
     newDay.push(today.toISOString());
+    let timeArr = [
+      10000000000, 12000200000, 14002010000, 11010000000, 10200000000,
+      15000000000, 13000000000,
+    ];
 
-    socket2.on("PoolTRatio", (data) => {
-      const json = JSON.parse(data);
-      let timeArr = [
-        10000000000, 12000200000, 14002010000, 11010000000, 10200000000,
-        15000000000, 13000000000,
-      ];
-      console.log(time);
-      if (time < 0) {
-        clearInterval(x);
-        timeArr.push(12240200000).slice(0, 1);
-      }
+    if (time < 0) {
+      clearInterval(x);
+      timeArr.push(12240200000).slice(0, 1);
+    }
 
-      setChartStyle((options) => ({
-        ...options,
-        series: [
-          {
-            name: ["변화율"],
-            data: timeArr,
-          },
-        ],
-        options: {
-          xaxis: {
-            categories: newDay,
-          },
+    setChartStyle((options) => ({
+      ...options,
+      series: [
+        {
+          name: ["변화율"],
+          data: timeArr,
         },
-      }));
-    });
-    return () => socket2.close();
-  }, [time, x]);
+      ],
+      options: {
+        xaxis: {
+          categories: newDay,
+        },
+      },
+    }));
+    // socket2.on("PoolTRatio", (data) => {
+    //   const json = JSON.parse(data);
+
+    // });
+    // return () => socket2.close();
+  }, []);
 
   return (
     <Container>

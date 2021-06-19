@@ -1,29 +1,29 @@
 export const data = [
-  // {
-  //   id: "hack",
-  //   label: "hack",
-  //   value: 106,
-  //   color: "hsl(30, 70%, 50%)",
-  // },
-  // {
-  //   id: "php",
-  //   label: "php",
-  //   value: 315,
-  //   color: "hsl(222, 70%, 50%)",
-  // },
   {
-    id: "haskell",
-    label: "haskell",
+    id: "JAP",
+    label: "JAP",
+    value: 106,
+    color: "hsl(30, 70%, 50%)",
+  },
+  {
+    id: "KAi",
+    label: "KAi",
+    value: 315,
+    color: "hsl(222, 70%, 50%)",
+  },
+  {
+    id: "conder",
+    label: "conder",
     value: 546,
   },
   {
-    id: "c",
-    label: "c",
+    id: "NeoTar",
+    label: "NeoTar",
     value: 470,
   },
   {
-    id: "javascript",
-    label: "javascript",
+    id: "CHUNG",
+    label: "CHUNG",
     value: 480,
   },
 ];

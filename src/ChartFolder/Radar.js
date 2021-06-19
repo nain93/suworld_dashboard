@@ -90,12 +90,9 @@ function Radar() {
     },
   });
 
-  const [test, setTest] = useState("");
-
   useEffect(() => {
     socket2.on("PoolNQRatio", (data) => {
       const json = JSON.parse(data);
-      setTest(json);
       setChartStyle((options) => ({
         ...options,
         options: {

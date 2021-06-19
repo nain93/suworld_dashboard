@@ -78,7 +78,7 @@ function CoinTable() {
       ]);
     });
     setFadeOn(true);
-    return () => socket.close();
+    // return () => socket.close();
   }, []);
 
   useEffect(() => {

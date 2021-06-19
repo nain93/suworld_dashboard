@@ -40,6 +40,7 @@ const Container = styled.div`
 
 function Donut3() {
   const [chartStyle, setChartStyle] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const id = [
@@ -65,16 +66,16 @@ function Donut3() {
         });
       }
       // newArr = newArr.slice(0, 5);
-      setChartStyle(newArr);
+      setChartStyle((chartStyle) => [...newArr.slice(0, 5)]);
+      setLoading(false);
     });
   }, []);
 
   return (
     <Container>
       <span>매니저풀 이름과 관심도</span>
-      {console.log(chartStyle)}
       <ResponsivePie
-        data={chartStyle === [] ? data : chartStyle}
+        data={loading ? data : chartStyle}
         height={200}
         margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
         innerRadius={0.5}
@@ -87,7 +88,7 @@ function Donut3() {
         arcLinkLabelsSkipAngle={40}
         arcLinkLabelsTextColor="#a0a0a0"
         arcLinkLabelsColor={{ from: "color" }}
-        arcLabelsSkipAngle={10}
+        arcLabelsSkipAngle={0}
         arcLinkLabelsStraightLength={0}
         arcLabelsTextColor={{ from: "color", modifiers: [["darker", "2.2"]] }}
       />

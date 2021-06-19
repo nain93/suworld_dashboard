@@ -37,7 +37,9 @@ function GridBox() {
       <div style={{ position: "relative" }}>
         <Donut3 />
       </div>
-      <div>{/* <Radar /> */}</div>
+      <div>
+        <Radar />
+      </div>
       <div>
         <Spline />
       </div>
