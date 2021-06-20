@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { socket } from "./App";
+import Moment from "react-moment";
+import "moment/locale/ko";
+import { useInterval } from "react-use";
 
 const Container = styled.div`
   width: 100%;
@@ -17,6 +20,10 @@ const Container = styled.div`
     > tbody {
       height: 40px;
       td:nth-child(2) {
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      td:nth-child(4) {
         overflow: hidden;
         text-overflow: ellipsis;
       }
@@ -51,18 +58,19 @@ const TableStyle = styled.tbody`
   transform: translateY(-50px);
   opacity: 0;
   animation: ${tableFade} 0.2s ease-in-out forwards;
-  /* animation: ${tableFade} 1s linear;
-  transition: ; */
 `;
 
 function CoinTable() {
   const [block, setBlock] = useState([]);
   const [fadeOn, setFadeOn] = useState(false);
+  const [test, setTest] = useState("");
 
   useEffect(() => {
     socket.on("block", (data) => {
       const json = JSON.parse(data);
+      const now = new Date();
       const date = new Date(json.timestamp);
+      setTest(now - date);
       setBlock((curData) => [
         {
           ...json,
@@ -73,19 +81,21 @@ function CoinTable() {
               ? `0${date.getMinutes()}`
               : `${date.getMinutes()}`
           }`,
+          // passtime: Math.ceil((now - date) / 1000),
         },
         ...curData,
       ]);
     });
     setFadeOn(true);
-    // return () => socket.close();
   }, []);
 
   useEffect(() => {
+    console.log(block);
     if (block.length > 10) {
+      setBlock((block) => [...block, { passtime: Math.ceil(test) / 1000 }]);
       setBlock((block) => [...block.slice(0, 10)]);
     }
-  }, [block]);
+  }, [block, test]);
 
   return (
     <Container>
@@ -94,7 +104,7 @@ function CoinTable() {
           <tr>
             <th></th>
             <th></th>
-            <th>블록정보</th>
+            <th>Block information</th>
           </tr>
         </thead>
         <tbody>
@@ -102,7 +112,7 @@ function CoinTable() {
             <th>Block</th>
             <th>Timestamp</th>
             <th>Trx_count</th>
-            <th>Reward</th>
+            <th>Hash</th>
             <th>Passtime</th>
           </tr>
         </tbody>
@@ -131,7 +141,7 @@ function CoinTable() {
                   </td>
                   <td>{item.timestamp}</td>
                   <td>{item.trx_count}</td>
-                  <td>{item.reward}</td>
+                  <td>{item.hash}</td>
                   <td>{item.passtime}</td>
                 </tr>
               </TableStyle>

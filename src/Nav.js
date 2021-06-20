@@ -1,8 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import Clock from "react-live-clock";
-import "moment-timezone";
-// import { socket } from "./App";
 
 const Container = styled.div`
   width: 100%;
@@ -17,35 +14,19 @@ const TitleBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-family: "Orbitron", sans-serif;
   h1 {
     color: white;
     font-size: 2.5rem;
     font-weight: 700;
   }
-  div {
-    word-spacing: 5px;
-    letter-spacing: 2px;
-    color: #4cdbff;
-  }
 `;
 
 function Nav() {
-  // const [nodeCount, setNodeCount] = useState("");
-
-  // useEffect(() => {
-  //   socket.on("node", (data) => {
-  //     const json = JSON.parse(data);
-  //     setNodeCount(json);
-  //   });
-  // }, []);
-
   return (
     <Container>
       <TitleBox>
-        <h1>SUWORLD</h1>
-        <div>
-          <Clock format={"YYYY-MM-DD HH:mm:ss"} ticking={true} />
-        </div>
+        <h1>HYPERCHAIN</h1>
       </TitleBox>
     </Container>
   );

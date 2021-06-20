@@ -119,7 +119,7 @@ function Bar() {
 
   return (
     <Container>
-      <span>15일간 데이터</span>
+      <span>15 days of data</span>
       <Chart
         options={barOptions.options}
         series={barOptions.series}

@@ -1,6 +1,7 @@
 import styled, { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 import backImg from "./img/back_img.png";
+// import backImg2 from "./img/back_img2.jpg";
 
 const GlobalStyles = createGlobalStyle`
     ${reset}
@@ -8,7 +9,6 @@ const GlobalStyles = createGlobalStyle`
         box-sizing:border-box;
     }
     body{
-        font-family: 'Noto Sans KR', sans-serif;
         line-height: 1.8;
         font-size:15px;
         background-color:black;
@@ -28,8 +28,9 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 export const GlobalContainer = styled.div`
-  /* background-image: url(${backImg});
-  z-index: -999; */
+  background-image: url(${backImg});
+  z-index: -999;
+  /* background: linear-gradient(60deg, #3a4268, black); */
   background-size: cover;
   background-position: center center;
   height: 100vh;

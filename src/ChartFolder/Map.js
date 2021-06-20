@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { ResponsiveChoropleth } from "@nivo/geo";
 import { data } from "../data";
@@ -29,11 +29,28 @@ const Container = styled.div`
 `;
 
 function Map() {
+  const [dumData, setDumData] = useState([]);
+
+  useEffect(() => {
+    const timeOut = setTimeout(
+      () =>
+        setDumData((dumData) => [
+          ...data.map((item) => ({
+            id: item.id,
+            value: Math.floor(Math.random() * 500000),
+          })),
+        ]),
+      5000
+    );
+
+    return () => clearTimeout(timeOut);
+  }, [dumData]);
+
   return (
     <Container>
-      <span>참여국가</span>
+      <span>Participating Countries</span>
       <ResponsiveChoropleth
-        data={data}
+        data={dumData}
         features={countries.features}
         margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
         colors="blues"
@@ -43,7 +60,7 @@ function Map() {
         valueFormat=".2s"
         projectionTranslation={[0.5, 0.5]}
         projectionRotation={[0, 0, 0]}
-        enableGraticule={true}
+        enableGraticule={false}
         graticuleLineColor="inherit"
         borderWidth={0.5}
         borderColor="#4274ff"

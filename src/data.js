@@ -113,7 +113,7 @@ export const data = [
   },
   {
     id: "CHN",
-    value: 260808,
+    value: 260000,
   },
   {
     id: "CIV",

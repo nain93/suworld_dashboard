@@ -111,7 +111,7 @@ function Radar() {
 
   return (
     <Container>
-      <span>풀이름, 참여량, 비율</span>
+      <span>Name and Ratio</span>
       <Chart
         options={chartStyle.options}
         series={chartStyle.series}

@@ -1,4 +1,4 @@
-import GlobalStyles from "./GolbalStyles";
+import GlobalStyles, { GlobalContainer } from "./GolbalStyles";
 import Nav from "./Nav";
 import GridBox from "./GridBox";
 import styled from "styled-components";
@@ -16,7 +16,17 @@ const Container = styled.div`
     top: 0;
     width: 100%;
     height: 100%;
+    z-index: -999;
   }
+`;
+
+const GifBox = styled.div`
+  position: fixed !important;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -999;
 `;
 
 export const socket = io("https://sws.suworld.net", {
@@ -66,10 +76,33 @@ function App() {
   return (
     <>
       <GlobalStyles />
+      <GlobalContainer />
       <Container>
         <Nav />
         <Header />
         <GridBox />
+        <GifBox>
+          {/* <div
+            style={{
+              width: "100%",
+              height: 0,
+              paddingBottom: "56%",
+              position: "relative",
+            }}
+          >
+            <iframe
+              title="dd"
+              src="https://giphy.com/embed/i4jKn7itdV2Tvjzj6Y"
+              width="100%"
+              height="100%"
+              style={{ position: "absolute" }}
+              frameBorder="0"
+              class="giphy-embed"
+              allowFullScreen
+            />
+          </div> */}
+        </GifBox>
+
         <Particles
           params={{
             particles: {
@@ -113,7 +146,7 @@ function App() {
                 random: true,
                 anim: {
                   enable: true,
-                  speed: 2,
+                  speed: 10,
                   size_min: 0,
                   sync: false,
                 },

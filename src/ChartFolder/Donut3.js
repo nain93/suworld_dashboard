@@ -28,16 +28,6 @@ const Container = styled.div`
   position: absolute;
 `;
 
-// {
-//   ...json.att.map((item) => ({
-//     id: item,
-//     labe: item,
-//   })),
-//   ...json.qty.map((item) => ({
-//     value: item,
-//   })),
-// },
-
 function Donut3() {
   const [chartStyle, setChartStyle] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -50,10 +40,10 @@ function Donut3() {
       "CHUNG",
       "NeoTar",
       "HYPER",
-      "Pio",
-      "Neo",
-      "FinalA",
-      "Erebos",
+      // "Pio",
+      // "Neo",
+      // "FinalA",
+      // "Erebos",
     ];
     socket2.on("PoolAtt", (data) => {
       const json = JSON.parse(data);
@@ -61,7 +51,7 @@ function Donut3() {
       for (let i = 0; i < json.att.length; i++) {
         newArr.push({
           id: id[i],
-          label: json.att[i],
+          label: id[i],
           value: json.qty[i],
         });
       }
@@ -73,7 +63,7 @@ function Donut3() {
 
   return (
     <Container>
-      <span>매니저풀 이름과 관심도</span>
+      <span>Name and Interest</span>
       <ResponsivePie
         data={loading ? data : chartStyle}
         height={200}
@@ -91,6 +81,31 @@ function Donut3() {
         arcLabelsSkipAngle={0}
         arcLinkLabelsStraightLength={0}
         arcLabelsTextColor={{ from: "color", modifiers: [["darker", "2.2"]] }}
+        legends={[
+          {
+            anchor: "bottom-left",
+            direction: "column",
+            justify: true,
+            translateX: 20,
+            translateY: -50,
+            itemsSpacing: 0,
+            itemWidth: 94,
+            itemHeight: 18,
+            itemDirection: "left-to-right",
+            itemTextColor: "#fff",
+            itemOpacity: 0.85,
+            symbolSize: 18,
+            effects: [
+              {
+                on: "hover",
+                style: {
+                  //   itemTextColor: "red",
+                  itemOpacity: 1,
+                },
+              },
+            ],
+          },
+        ]}
       />
     </Container>
   );

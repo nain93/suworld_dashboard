@@ -130,7 +130,7 @@ function Spline() {
 
   return (
     <Container>
-      <span>참여량 변화율</span>
+      <span>Rate of change</span>
       <Chart
         options={chartStyle.options}
         series={chartStyle.series}

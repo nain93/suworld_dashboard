@@ -138,7 +138,7 @@ function Bar2() {
 
   return (
     <Container>
-      <span>MP의 채굴량 비율</span>
+      <span>MP Mining and Ratio</span>
       <Chart
         options={chartStyle.options}
         series={chartStyle.series}

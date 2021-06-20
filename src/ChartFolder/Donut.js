@@ -189,7 +189,7 @@ function DonutChart() {
 
   return (
     <Container>
-      <span>MP, P, G 비율</span>
+      <span>MP, P, G Ratio</span>
       <Chart
         options={chartStyle1.optionsRadial}
         series={chartStyle1.seriesRadial}

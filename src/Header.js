@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Clock from "react-live-clock";
 import styled from "styled-components";
+import { socket } from "./App";
 
 const Container = styled.div`
   width: 100%;
@@ -10,14 +12,38 @@ const Container = styled.div`
 const ImgBox = styled.div`
   width: 100%;
   height: 100%;
-  box-shadow: inset 0px -10px 30px -10px #00517f;
-  border: 1px solid rgba(0, 81, 127, 0.5);
+
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  div {
+    word-spacing: 5px;
+    letter-spacing: 2px;
+    color: #4cdbff;
+  }
 `;
 
 function Header() {
+  const [nodeCount, setNodeCount] = useState("");
+
+  useEffect(() => {
+    socket.on("node", (data) => {
+      const json = JSON.parse(data);
+      setNodeCount(json);
+    });
+  }, []);
+
   return (
     <Container>
-      <ImgBox></ImgBox>
+      <ImgBox>
+        <div>
+          <Clock format={"YYYY-MM-DD HH:mm:ss"} ticking={true} />
+        </div>
+        <span>Online Nodes: {nodeCount.node_count || 0}</span>
+      </ImgBox>
     </Container>
   );
 }
