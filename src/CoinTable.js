@@ -90,7 +90,7 @@ function CoinTable() {
   }, []);
 
   useEffect(() => {
-    console.log(block);
+    // console.log(block);
     if (block.length > 10) {
       setBlock((block) => [...block, { passtime: Math.ceil(test) / 1000 }]);
       setBlock((block) => [...block.slice(0, 10)]);

@@ -1,4 +1,4 @@
-export const data = [
+export const initData = [
   {
     id: "AFG",
     value: 336354,

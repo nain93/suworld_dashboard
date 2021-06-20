@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { ResponsiveChoropleth } from "@nivo/geo";
-import { data } from "../data";
+import { initData } from "../data";
 import countries from "../world_countries.json";
+import { socket2 } from "../App";
 
 const Container = styled.div`
   width: 100%;
@@ -35,9 +36,9 @@ function Map() {
     const timeOut = setTimeout(
       () =>
         setDumData((dumData) => [
-          ...data.map((item) => ({
+          ...initData.map((item) => ({
             id: item.id,
-            value: Math.floor(Math.random() * 500000),
+            value: Math.floor(Math.random() * 300),
           })),
         ]),
       5000
@@ -54,7 +55,7 @@ function Map() {
         features={countries.features}
         margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
         colors="blues"
-        domain={[0, 1000000]}
+        domain={[0, 300]}
         unknownColor="#666666"
         label="properties.name"
         valueFormat=".2s"
