@@ -23,10 +23,10 @@ export const initData = [
     id: "ARM",
     value: 923418,
   },
-  {
-    id: "ATA",
-    value: 342555,
-  },
+  // {
+  //   id: "ATA",
+  //   value: 342555,
+  // },
   {
     id: "ATF",
     value: 598836,
