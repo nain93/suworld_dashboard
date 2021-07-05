@@ -84,6 +84,8 @@ function Bar() {
     ],
   });
 
+  const [test, setTest] = useState();
+
   useEffect(() => {
     let today = new Date();
     let initDay = new Date(today.setDate(today.getDate() - 14));
@@ -99,6 +101,7 @@ function Bar() {
     }
     socket2.on("trx30", (data) => {
       const json = JSON.parse(data);
+      setTest(json);
       setBarOptions((options) => ({
         ...options,
         options: {
@@ -114,8 +117,15 @@ function Bar() {
         ],
       }));
     });
-    // return () => socket.close();
+    return () => socket2.close();
   }, []);
+
+  // useEffect(() => {
+  //   console.log(barOptions.series[0].data ?? []);
+  //   if (barOptions.series[0].data.length !== 0) {
+  //     socket2.disconnect("trx30");
+  //   }
+  // }, [barOptions.series]);
 
   return (
     <Container>

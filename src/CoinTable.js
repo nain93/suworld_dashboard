@@ -80,6 +80,7 @@ function CoinTable() {
     //     passtime: `${Math.ceil(test / 1000)} ago`,
     //   },
     // ]);
+    return () => socket.close();
   }, []);
 
   useEffect(() => {

@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { ResponsiveChoropleth } from "@nivo/geo";
 import { initData } from "../data";
 import countries from "../world_countries.json";
-import { socket2 } from "../App";
 
 const Container = styled.div`
   width: 100%;

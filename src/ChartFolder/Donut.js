@@ -185,6 +185,7 @@ function DonutChart() {
         ],
       }));
     });
+    return () => socket2.close();
   }, []);
 
   return (

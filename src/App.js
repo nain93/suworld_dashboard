@@ -44,9 +44,7 @@ export const socket2 = io("https://sdash.suworld.net", {
 function App() {
   useEffect(() => {
     socket.on("connect", (data) => {
-      setInterval(() => {
-        socket.emit("main-init", {});
-      }, 2000);
+      socket.emit("main-init", {});
     });
 
     socket.on("reconnect", (data) => {
@@ -56,13 +54,12 @@ function App() {
     socket.on("disconnect", function (reason) {
       console.log("disconnect", reason);
     });
+    return () => socket.close();
   }, []);
 
   useEffect(() => {
     socket2.on("connect", (data) => {
-      setInterval(() => {
-        socket2.emit("dash-init", {});
-      }, 2000);
+      socket2.emit("dash-init", {});
     });
 
     socket2.on("disconnect", function (reason) {
@@ -72,6 +69,7 @@ function App() {
     socket2.on("reconnect", function (data) {
       socket2.emit("dash-init", {});
     });
+    return () => socket2.close();
   }, []);
   return (
     <>

@@ -107,6 +107,7 @@ function Radar() {
         ],
       }));
     });
+    return () => socket2.close();
   }, []);
 
   return (

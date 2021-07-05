@@ -59,6 +59,7 @@ function Donut3() {
       setChartStyle((chartStyle) => [...newArr.slice(0, 5)]);
       setLoading(false);
     });
+    return () => socket2.close();
   }, []);
 
   return (
